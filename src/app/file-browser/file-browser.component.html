@@ -1,1 +1,48 @@
-<p>file-browser works!</p>
+
+    <h2 mat-dialog-title>Select file</h2>
+    <mat-dialog-content>
+        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
+            
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+              <li 
+                [ngClass]="{'leaf-selected': node.fullPath === selectedFile}" 
+                (click)="onLeafSelect(node.fullPath)"
+                class="mat-tree-node">
+                
+                <button mat-icon-button disabled>
+                    <mat-icon class="mat-icon-rtl-mirror">text_snippet</mat-icon>
+                </button>
+                {{node.name}}
+              </li>
+            </mat-tree-node>
+            
+            <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+              <li>
+                <div class="mat-tree-node">
+                  <button mat-icon-button matTreeNodeToggle
+                          [attr.aria-label]="'Toggle ' + node.name">
+                    <mat-icon class="mat-icon-rtl-mirror">
+                      {{treeControl.isExpanded(node) ? 'folder_open' : 'folder'}}
+                    </mat-icon>
+                  </button>
+                  {{node.name}}
+                </div>
+                <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+                  <ng-container matTreeNodeOutlet></ng-container>
+                </ul>
+              </li>
+            </mat-nested-tree-node>
+        </mat-tree>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button [mat-dialog-close]="null" >Close</button>
+        <button 
+            mat-raised-button 
+            [disabled]="!selectedFile" 
+            color="primary"
+            (click)="onSelect()"
+        >Select</button>
+    </mat-dialog-actions>
+
+    
+

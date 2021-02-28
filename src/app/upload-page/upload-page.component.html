@@ -4,7 +4,12 @@
         <mat-label>File</mat-label>
         <input matInput [readonly]="true" type="text" value="directory/dir10/file10.ext">
       </mat-form-field>
-      <button style="margin-left: 1rem;" mat-raised-button color="primary">Browse</button>
+      <button 
+        mat-raised-button 
+        color="primary"
+        style="margin-left: 1rem;"
+        (click)="onBrowse()"
+      >Browse</button>
     </div>
     <button mat-raised-button color="primary">Upload</button>
     <mat-progress-bar

@@ -1,0 +1,16 @@
+<div style="display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; height: 200px; margin: 3rem;">
+    <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+      <mat-form-field>
+        <mat-label>File</mat-label>
+        <input matInput [readonly]="true" type="text" value="directory/dir10/file10.ext">
+      </mat-form-field>
+      <button style="margin-left: 1rem;" mat-raised-button color="primary">Browse</button>
+    </div>
+    <button mat-raised-button color="primary">Upload</button>
+    <mat-progress-bar
+      class="example-margin"
+      color="primary"
+      mode="indeterminate"
+    >
+    </mat-progress-bar>
+</div>

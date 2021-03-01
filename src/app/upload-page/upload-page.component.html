@@ -1,8 +1,8 @@
-<div style="display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; height: 200px; margin: 3rem;">
-    <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+<div class="upload-page">
+    <div class="file-info">
       <mat-form-field>
         <mat-label>File</mat-label>
-        <input matInput [readonly]="true" type="text" value="directory/dir10/file10.ext">
+        <input matInput [readonly]="true" type="text" [value]="this.file">
       </mat-form-field>
       <button 
         mat-raised-button 
@@ -11,11 +11,20 @@
         (click)="onBrowse()"
       >Browse</button>
     </div>
-    <button mat-raised-button color="primary">Upload</button>
+    <button 
+      mat-raised-button 
+      [disabled]="!file" 
+      color="primary"
+      (click)="onUpload()"
+    >Upload</button>
     <mat-progress-bar
+      *ngIf="uploading"
       class="example-margin"
       color="primary"
       mode="indeterminate"
     >
     </mat-progress-bar>
+    <h4 *ngIf="uploaded">
+      File Uploaded!
+    </h4>
 </div>

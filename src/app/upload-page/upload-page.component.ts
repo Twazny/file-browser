@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog'
 import { FileBrowserComponent } from '../file-browser/file-browser.component'
+import { UploadService } from '../upload.service'
 
 @Component({
   selector: 'app-upload-page',
@@ -9,7 +10,12 @@ import { FileBrowserComponent } from '../file-browser/file-browser.component'
 })
 export class UploadPageComponent implements OnInit {
 
+  file: string = null;
+  uploading: boolean;
+  uploaded: boolean;
+
   constructor(
+    private uploadService: UploadService,
     private dialog: MatDialog
   ) { }
 
@@ -19,7 +25,17 @@ export class UploadPageComponent implements OnInit {
   onBrowse(): void {
     const dialogReg = this.dialog.open(FileBrowserComponent,{width: '60%'})
     dialogReg.afterClosed().subscribe(result => {
-      console.log(result)
+      this.file = result
+      this.uploaded = false
+    })
+  }
+
+  onUpload(): void {
+    this.uploading = true
+    this.uploadService.uploadFile(this.file)
+      .subscribe(path => {
+        this.uploading = false
+        this.uploaded = true
     })
   }
 }

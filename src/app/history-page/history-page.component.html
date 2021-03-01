@@ -1,1 +1,8 @@
-<p>history-page works!</p>
+<p *ngFor="let file of history$ | async">
+    {{file}}
+</p>
+<button 
+    mat-raised-button 
+    color="primary"
+    (click)="onClear()"
+>Clear</button>

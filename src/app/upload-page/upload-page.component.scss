@@ -1,0 +1,19 @@
+.upload-page {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-start; 
+    align-items: flex-start; 
+    height: 200px; 
+    margin: 3rem;
+
+    & > *:not(:first-child) {
+        margin-top: 1.5rem;
+    }
+}
+
+.file-info {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: center;
+}

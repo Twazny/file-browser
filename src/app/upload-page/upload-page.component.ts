@@ -23,10 +23,15 @@ export class UploadPageComponent implements OnInit {
   }
 
   onBrowse(): void {
-    const dialogReg = this.dialog.open(FileBrowserComponent,{width: '60%'})
+    const dialogReg = this.dialog.open(FileBrowserComponent,{
+      width: '100%', 
+      data: {selectedFile: this.file}
+    })
     dialogReg.afterClosed().subscribe(result => {
+      if (!result) { return }
       this.file = result
       this.uploaded = false
+      this.uploading = false
     })
   }
 
@@ -35,7 +40,11 @@ export class UploadPageComponent implements OnInit {
     this.uploadService.uploadFile(this.file)
       .subscribe(path => {
         this.uploading = false
-        this.uploaded = true
+        if (this.file !== path) {
+          this.uploaded = false
+        } else {
+          this.uploaded = true
+        }
     })
   }
 }

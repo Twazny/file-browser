@@ -13,7 +13,7 @@
     </div>
     <button 
       mat-raised-button 
-      [disabled]="!file" 
+      [disabled]="!file || uploading" 
       color="primary"
       (click)="onUpload()"
     >Upload</button>
@@ -25,6 +25,6 @@
     >
     </mat-progress-bar>
     <h4 *ngIf="uploaded">
-      File Uploaded!
+      Upload complete!
     </h4>
 </div>

@@ -5,9 +5,9 @@ import { HistoryPageComponent } from './history-page/history-page.component';
 import { UploadPageComponent } from './upload-page/upload-page.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'upload', pathMatch: 'full'},
-  {path: 'upload', component: UploadPageComponent},
-  {path: 'history', component: HistoryPageComponent},
+  { path: '', redirectTo: 'upload', pathMatch: 'full' },
+  { path: 'upload', component: UploadPageComponent, data: { title: 'Upload page' } },
+  { path: 'history', component: HistoryPageComponent, data: { title: 'History page' } },
 ];
 
 @NgModule({

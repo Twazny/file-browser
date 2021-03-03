@@ -7,6 +7,7 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { MatTreeModule } from '@angular/material/tree'
 import { MatIconModule } from '@angular/material/icon'
 import { MatListModule } from '@angular/material/list'
+import { MatSidenavModule } from '@angular/material/sidenav'
 
 const materialComponents = [
   MatButtonModule,
@@ -16,7 +17,8 @@ const materialComponents = [
   MatDialogModule,
   MatTreeModule,
   MatIconModule,
-  MatListModule
+  MatListModule,
+  MatSidenavModule
 ]
 
 @NgModule({

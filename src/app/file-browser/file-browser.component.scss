@@ -10,35 +10,44 @@
   cursor: pointer;
 }
 
-.example-tree li {
+mat-tree > mat-nested-tree-node > li > div.mat-tree-node::before {
+  border: none;
+}
+
+.example-tree li.mat-tree-node,
+.example-tree div.mat-tree-node {
   position: relative;
   &::before {
-    width: inherit;
     position: absolute;
-    height: 24px;
+    content: "";
+    border: 1px dotted lightgray;
+    position: absolute;
+    height: 48px;
     left: -20px;
-    content: '';
-    border-bottom: 1px dotted lightgray;
+    border-width: 0 0 1px 1px;
+    width: 24px;
+    bottom: 24px;
   }
 }
 
-.example-tree ul {
-  // box-shadow: inset 5px 0px 0px 0px black;
+.example-tree mat-tree-node:first-child li.mat-tree-node::before,
+.example-tree
+  mat-nested-tree-node:first-child
+  > li
+  > div.mat-tree-node::before {
+  height: 24px;
+}
+
+.example-tree mat-nested-tree-node:not(:last-child) > li > ul {
   position: relative;
   &::before {
-    // width: inherit;
-    height: calc(100% - 24px);
-    // height: 20px;
+    height: 100%;
     position: absolute;
     z-index: 1;
-    left: 20px;
+    left: -20px;
     bottom: 24px;
-    content: '';
+    content: "";
     border-left: 1px dotted lightgrey;
-    // content:  url(../../assets/method-draw-image.svg);
-    // & svg {
-    //   height: 20px;
-    // };
   }
 }
 

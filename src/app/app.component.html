@@ -14,13 +14,17 @@
         <span class="mat-h3 mat-body-2">Upload page</span>
       </div>
       <div>
-        <a routerLink="/history" (click)="drawer.toggle()" routerLinkActive="mat-mini-fab" color="primary" mat-icon-button aria-label="Navigate to history page">
+        <a 
+          routerLink="/history" 
+          (click)="drawer.toggle()" 
+          routerLinkActive="mat-mini-fab" 
+          color="primary" 
+          mat-icon-button 
+          aria-label="Navigate to history page">
           <mat-icon>history</mat-icon>
         </a>
         <span class="mat-h3 mat-body-2">History page</span>
       </div>
-
-
     </div>
   </mat-drawer>
 
@@ -31,15 +35,14 @@
         color="primary" 
         (click)="drawer.toggle()" 
         aria-label="Open side navigation"
-        class="toggle-side-nav"
-      >     
+        class="toggle-side-nav">     
         <mat-icon>menu</mat-icon>
       </button>
-
-      <div class="mat-h3 mat-body-2">{{currentPageTitle}}</div>
+      <span class="mat-h3 mat-body-2">{{currentPageTitle}}</span>
     </mat-toolbar>
+    <ng-container *ngTemplateOutlet="template"></ng-container>
   </div>
-  <router-outlet></router-outlet>
+  
 </mat-drawer-container>
 <div *ngIf="!mobileLayout">
   <mat-toolbar [color]="">
@@ -54,6 +57,9 @@
       mat-button color="primary"
     >History page</a>
   </mat-toolbar>
-  <router-outlet></router-outlet>
+  <ng-container *ngTemplateOutlet="template"></ng-container>
 </div>
 
+<ng-template #template>
+  <router-outlet></router-outlet>
+</ng-template>

@@ -9,4 +9,5 @@
     mat-raised-button 
     color="primary"
     (click)="onClear()"
+    [disabled]="(history$ | async).length === 0"
 >Clear</button>

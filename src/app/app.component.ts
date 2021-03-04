@@ -1,31 +1,38 @@
-import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { ActivatedRoute } from '@angular/router'
+import { Component, OnDestroy } from '@angular/core';
+import { ActivationEnd, Router } from '@angular/router'
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { LayoutService } from './layout.service'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   title = 'file-browser';
   currentPageTitle: string;
-  mobileLayout = false;
+  mobileLayout: boolean;
+  layoutSubs: Subscription;
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
-    private route: ActivatedRoute
+    private router: Router,
+    private layoutService: LayoutService,
   ) {
-    this.breakpointObserver.observe([
-      Breakpoints.HandsetLandscape,
-      Breakpoints.HandsetPortrait
-    ]).subscribe(result => {
-      this.mobileLayout = result.matches
-    });
-
-    this.route.data.subscribe(data => {
-      console.log(data)
-      this.currentPageTitle = data.title
+    this.layoutSubs = this.layoutService.mobileLayout.subscribe(value => {
+      this.mobileLayout = value
     })
+
+    this.router.events
+      .pipe(
+        filter(event => event instanceof ActivationEnd)
+      )
+      .subscribe((event: ActivationEnd) => {
+        this.currentPageTitle = event.snapshot.data.title
+      })
+  }
+
+  ngOnDestroy() {
+    this.layoutSubs.unsubscribe()
   }
 }

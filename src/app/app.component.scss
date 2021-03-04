@@ -14,6 +14,6 @@
   }
 }
 
-.toggle-side-nav {
-  margin: 0.5rem;
+mat-toolbar > *:not(:first-child) {
+  margin: 0 0 0 1rem;
 }

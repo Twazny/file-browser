@@ -7,12 +7,7 @@ import { take, tap, map } from 'rxjs/operators'
 })
 export class UploadService {
 
-    uploadHistory: string[] = [
-        'root/dir3/dirz/file4.ext',
-        'root/dir4/dira/file5.ext',
-        'root/dir5/dirb/file6.ext',
-        'root/dir6/dir0/file7.ext',
-    ]
+    uploadHistory: string[] = []
     historySubject = new BehaviorSubject<string[]>(this.uploadHistory)
 
     uploadFile(path: string): Observable<string> {

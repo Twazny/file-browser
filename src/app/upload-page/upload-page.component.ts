@@ -39,6 +39,7 @@ export class UploadPageComponent implements OnInit, OnDestroy {
   onBrowse(): void {
     let dialogConfig: MatDialogConfig = {
       data: {selectedFile: this.file},
+      autoFocus: false,
       width: '100%'
     }
     if (this.mobileLayout) {

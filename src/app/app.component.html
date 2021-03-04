@@ -1,13 +1,65 @@
-<mat-toolbar [color]="">
-  <a 
-    routerLink="/upload" 
-    routerLinkActive="mat-raised-button" 
-    mat-button color="primary"
-  >Upload page</a>
-  <a 
-    routerLink="/history" 
-    routerLinkActive="mat-raised-button" 
-    mat-button color="primary"
-  >History page</a>
-</mat-toolbar>
-<router-outlet></router-outlet>
+<mat-drawer-container style="height: 100%;" *ngIf="mobileLayout" [hasBackdrop]="true"  autosize>
+  <mat-drawer #drawer class="example-sidenav" [autoFocus]="false" mode="over" >
+    <div class="nav-buttons-container">
+      <div>
+        <a 
+          routerLink="/upload" 
+          (click)="drawer.toggle()" 
+          routerLinkActive="mat-mini-fab" 
+          color="primary" 
+          mat-icon-button 
+          aria-label="Navigate to upload page">
+          <mat-icon>upload</mat-icon>
+        </a>
+        <span class="mat-h3 mat-body-2">Upload page</span>
+      </div>
+      <div>
+        <a 
+          routerLink="/history" 
+          (click)="drawer.toggle()" 
+          routerLinkActive="mat-mini-fab" 
+          color="primary" 
+          mat-icon-button 
+          aria-label="Navigate to history page">
+          <mat-icon>history</mat-icon>
+        </a>
+        <span class="mat-h3 mat-body-2">History page</span>
+      </div>
+    </div>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <mat-toolbar [color]="">
+      <button 
+        mat-mini-fab
+        color="primary" 
+        (click)="drawer.toggle()" 
+        aria-label="Open side navigation"
+        class="toggle-side-nav">     
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="mat-h3 mat-body-2">{{currentPageTitle}}</span>
+    </mat-toolbar>
+    <ng-container *ngTemplateOutlet="template"></ng-container>
+  </div>
+  
+</mat-drawer-container>
+<div *ngIf="!mobileLayout">
+  <mat-toolbar [color]="">
+    <a 
+      routerLink="/upload" 
+      routerLinkActive="mat-raised-button" 
+      mat-button color="primary"
+    >Upload page</a>
+    <a 
+      routerLink="/history" 
+      routerLinkActive="mat-raised-button" 
+      mat-button color="primary"
+    >History page</a>
+  </mat-toolbar>
+  <ng-container *ngTemplateOutlet="template"></ng-container>
+</div>
+
+<ng-template #template>
+  <router-outlet></router-outlet>
+</ng-template>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { UploadService } from '../upload.service';
 
 @Component({
   selector: 'app-history-page',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryPageComponent implements OnInit {
 
-  constructor() { }
+  // historySubs: Subscription
+  history$: Observable<string[]>
+
+  constructor(
+    private uploadService: UploadService
+  ) { }
 
   ngOnInit(): void {
+    this.history$ = this.uploadService.historySubject
+  }
+
+  onClear(): void {
+    this.uploadService.clearHistory()
   }
 
 }

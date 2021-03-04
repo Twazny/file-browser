@@ -1,1 +1,13 @@
-<p>history-page works!</p>
+<mat-list>
+    <mat-list-item *ngFor="let file of history$ | async">
+        {{file}}
+    </mat-list-item>
+</mat-list>
+
+<button 
+    style="margin-left: 16px;"
+    mat-raised-button 
+    color="primary"
+    (click)="onClear()"
+    [disabled]="(history$ | async).length === 0"
+>Clear</button>
